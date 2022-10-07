@@ -72,27 +72,6 @@ def preprocessing(data, num_imputer, bin_imputer, transformer, scaler):
     return norm_df
 
 
-#def request_prediction(model_uri, data):
-    """This function requests the API by sending customer data
-    and receiving API responses with predictions (score, application status).
-    """
-    headers = {"Content-Type": "application/json"}
-    data_json = data.to_dict(orient="records")[0]
-
-    # Dashboard request
-    response = requests.request(method='GET', headers=headers,
-                                url=model_uri, json=data_json)
-    if response.status_code != 200:
-        raise Exception("Request failed with status {}, {}".format(
-                response.status_code, response.text))
-
-    # API response
-    api_response = response.json()
-    score = api_response['score']
-    situation = api_response['class']
-    status = api_response['application']
-    return score, situation, status
-
 
 def load_model(file, key):
     """This function is used to load a serialized file."""
@@ -227,28 +206,18 @@ def main():
         result = 'sans risque'
         status = 'acceptée'
     
-    #prediction
-    st.write("Le crédit score varie entre 0 et 100. "
-             "Les clients ayant des scores supérieurs à 36 sont à risque.")
-    st.write("**Le score du client N°{} vaut {}.** "
+       #prediction
+    st.write("**Le crédit score varie entre 0 et 100. "
+             "Les clients ayant des scores supérieurs à 36 sont à risque.**")
+    st.write("Le score du client N°{} vaut {}."
                  "La situation du client étant {}, "
                  "la demande de crédit est {}.".format(customer_id, score,
                                                        customer_class, status))
     if customer_class == 0: 
-        st.success('Clients loan is accepted :thumbsup:')
+        st.success("Client's loan application is successful :thumbsup:")
     else: 
-        st.error('Clients loan is denied :thumbsdown:') 
-    
-    
-    
-    #prediction = model.predict(np.array(X))
-    #if prediction[0] == 0: 
-    #    st.success('Client does not default :thumbsup:')
-    #else: 
-    #    st.error('Client Defaults :thumbsdown:') 
+        st.error("Client's loan application is unsuccessful :thumbsdown:") 
 
-    #prdict_proba = model.predict_proba(np.array(X))[0][0]
-    #st.write(prdict_proba)
 
 
 
