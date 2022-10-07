@@ -81,23 +81,6 @@ def load_model(file, key):
     return model
 
 
-#def apply_knn(X, X_norm, data, features):
-    """This function uses the near neighbor's algorithm
-    to find the most similar group of a customer.
-    """
-    X_norm = X_norm[features]
-    X = X[features]
-    neigh = NearestNeighbors(
-        n_neighbors=11,
-        leaf_size=30,
-        metric='minkowski',
-        p=2)
-    neigh.fit(X_norm)
-    indice = neigh.kneighbors(X, return_distance=False)
-    index_list = list(indice[0])
-    knn_df = data.iloc[index_list, :]
-    return knn_df
-
 
 def customer_description(data):
     """This function creates a dataframe with customer descriptions."""
@@ -121,8 +104,8 @@ def customer_description(data):
 
 def main():
     st.set_page_config(layout='wide')
-    st.title("OUTIL DE SCORING CRÉDIT")
-    st.subheader('Les données relatives au client sélectionné')
+    st.title("CREDIT SCORING APPLICATION")
+    st.subheader('Data of selected client')
     
     # Loading the dataset
     data = load_data('data/data.csv')
@@ -153,9 +136,7 @@ def main():
     # Customer selection
     customers_list = list(data.SK_ID_CURR)
     customer_id = st.sidebar.selectbox(
-        "Saisir ou sélectionner l'identifiant d'un client :", customers_list)
-    
-
+        "Please select client ID :", customers_list)
     
     # Customer data
     customer_df = data[data.SK_ID_CURR == customer_id]
@@ -169,25 +150,19 @@ def main():
     
 
     #visualisation
-    st.subheader('Graphique 1')
+    st.subheader('Graph showing total income of all clients in the database')
     amt_inc_total = np.log(data.loc[data['SK_ID_CURR'] == int(customer_id), 'AMT_INCOME_TOTAL'].values[0])
     x_a = [np.log(data['AMT_INCOME_TOTAL'])]
     fig_a = ff.create_distplot(x_a,['AMT_INCOME_TOTAL'], bin_size=0.3)
-    fig_a.add_vline(x=amt_inc_total, annotation_text=' Vous êtes ici')
+    fig_a.add_vline(x=amt_inc_total, annotation_text=' Selected client')
 
     st.plotly_chart(fig_a, use_container_width=True)
 
-    st.header('''Résultat de la demande de crédit''')
+    st.header('''Credit application result''')
 
-    
-    
-    
-    
-    
+
     #prediction
     y_proba = model.predict_proba(np.array(X))[0][1]
-
-    #i need to find a way to incorporate the y_class selection threshold....
 
     # Looking for the customer situation (class 0 or 1)
     # by using the best threshold from precision-recall curve
@@ -200,26 +175,23 @@ def main():
 
     # Customer credit application result
     if customer_class == 1:
-        result = 'à risque'
-        status = 'refusée'
+        result = 'at risk of default'
+        status = 'refused'
     else:
-        result = 'sans risque'
-        status = 'acceptée'
+        result = 'no risk of default'
+        status = 'accepted'
     
-       #prediction
-    st.write("**Le crédit score varie entre 0 et 100. "
-             "Les clients ayant des scores supérieurs à 36 sont à risque.**")
-    st.write("Le score du client N°{} vaut {}."
-                 "La situation du client étant {}, "
-                 "la demande de crédit est {}.".format(customer_id, score,
+    #prediction
+    st.write("**The credit score is between 0 & 100. "
+             "Clients with a score greater than *36* are at risk of default.**")
+    st.write("Client N°{} credit score is **{}**. "
+                 "The client is classified as **{}**, "
+                 "the credit application is **{}**.".format(customer_id, score,
                                                        customer_class, status))
     if customer_class == 0: 
         st.success("Client's loan application is successful :thumbsup:")
     else: 
         st.error("Client's loan application is unsuccessful :thumbsdown:") 
-
-
-
 
 
 if __name__ == '__main__':
