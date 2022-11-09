@@ -180,6 +180,7 @@ def main():
     #prediction
     st.write("**The credit score is between 0 & 100. "
              "Clients with a score greater than *36* are at risk of default.**")
+    st.write("**Class 0: client does not default**")
     st.write("**Class 1: client defaults**")
     st.write("Client N°{} credit score is **{}**. "
                  "The client is classified as **{}**, "
