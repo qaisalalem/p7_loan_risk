@@ -14,15 +14,11 @@ import pickle
 # Front end library
 import streamlit as st
 
-# SHAP library
-import shap
-
 # Visualization library
 import plotly_express as px
 
 
 from pathlib import Path
-from sklearn.neighbors import NearestNeighbors
 import plotly.figure_factory as ff
 
 plt.style.use('seaborn')
@@ -184,6 +180,7 @@ def main():
     #prediction
     st.write("**The credit score is between 0 & 100. "
              "Clients with a score greater than *36* are at risk of default.**")
+    st.write("**Class 1: client defaults**")
     st.write("Client N°{} credit score is **{}**. "
                  "The client is classified as **{}**, "
                  "the credit application is **{}**.".format(customer_id, score,
