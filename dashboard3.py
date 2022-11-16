@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import requests
 import time
+import lightgbm as lgb
 
 # Serialization library
 import pickle
@@ -17,11 +18,14 @@ import streamlit as st
 # Visualization library
 import plotly_express as px
 
+# SHAP library
+import shap
 
 from pathlib import Path
 import plotly.figure_factory as ff
 
 plt.style.use('seaborn')
+import math as m
 
 
 def load_data(file):
@@ -144,15 +148,78 @@ def main():
     X = X.drop(['SK_ID_CURR'], axis=1)
     
     
+    #Visualisation according to new advice
+    #dropdown menu for to graphs, correlation between selected variables
+    variables_list1= list(data.columns)
+    variable1= st.sidebar.selectbox(
+        "Please select variable #1 :", variables_list1)
 
-    #visualisation
-    st.subheader('Graph showing total income of all clients in the database')
+
+    variables_list2= list(data.columns)
+    variable2= st.sidebar.selectbox(
+        "Please select variable #2 :", variables_list2)
+
+    #st.subheader('Graph showing total income of all clients in the database')
+    #i am using amt_inc_total to show selected client.
     amt_inc_total = np.log(data.loc[data['SK_ID_CURR'] == int(customer_id), 'AMT_INCOME_TOTAL'].values[0])
-    x_a = [np.log(data['AMT_INCOME_TOTAL'])]
-    fig_a = ff.create_distplot(x_a,['AMT_INCOME_TOTAL'], bin_size=0.3)
-    fig_a.add_vline(x=amt_inc_total, annotation_text=' Selected client')
+    #x_a = [np.log(data['AMT_INCOME_TOTAL'])]
+    #fig_a = ff.create_distplot(x_a,['AMT_INCOME_TOTAL'], bin_size=0.3)
+    #fig_a.add_vline(x=amt_inc_total, annotation_text=' Selected client')
+    #st.plotly_chart(fig_a, use_container_width=True)
 
-    st.plotly_chart(fig_a, use_container_width=True)
+    #visualisation fig 1
+    #st.write(variable1)
+    st.subheader('Graph showing variable 1')
+    df = data[variable1] #i managed to select my variable now i need to plot it. this method works, i need to try another method
+    df=[np.log(df)]
+    
+    fig=ff.create_distplot(df, [variable1] , bin_size= 0.3)
+    fig.add_vline(x=amt_inc_total, annotation_text=' Selected client')
+    st.plotly_chart(fig, use_container_width=True)
+
+    
+    
+
+    #Visualisation fig 2
+    df2=data[variable2]
+    df2=[np.log(df2)]
+    #df2=pd.Series(df2)
+    st.subheader('Graph showing variable 2')
+    fig_b=ff.create_distplot(df2, [variable2] , bin_size= 0.3)
+    fig_b.add_vline(x=amt_inc_total, annotation_text=' Selected client')
+    st.plotly_chart(fig_b, use_container_width=True)
+    
+    #dataframe=norm_df.copy(deep=True)
+    #dataframe=dataframe.select_dtypes(include=['float64', 'int64'], exclude='bool')
+    #dataframe=dataframe.replace([np.inf, -np.inf], np.nan)
+
+    #st.write(dataframe)
+    #trying to display processed data as figures.
+ #   variables_list3= list(dataframe.columns)
+ #   variable3= st.sidebar.selectbox(
+  #      "Please select variable #3 :", variables_list3)
+
+#####TypeError: Cannot compare types 'ndarray(dtype=object)' and 'float'
+ 
+ #   df3=dataframe[variable3]
+    #df3=[df3]
+ #   df3=[np.log(df3)]
+ #   df3=pd.Series(df3)
+    #df3=df3.transform(np.log)
+    #st.write(dataframe)
+  #  df3=df3.dropna(inplace=True)
+    #df3.replace([np.inf, -np.inf], np.nan, inplace=True)
+    #df3.dropna(inplace=True)
+    #df3=df3[df3.replace([np.inf, -np.inf], np.nan).notnull().all(axis=1)] 
+
+    #df3=[v for v in df3 if not m.isnan(v) and not m.isinf(v)] 
+    
+    st.subheader('Graph showing variable 3')
+    #fig_c=ff.create_distplot(df3, [variable3] , bin_size= 0.3)
+    #fig_c.add_vline(x=amt_inc_total, annotation_text=' Selected client')
+    #st.plotly_chart(fig_c, use_container_width=True)
+
+
 
     st.header('''Credit application result''')
 
@@ -178,10 +245,10 @@ def main():
         status = 'accepted'
     
     #prediction
-    st.write("**The credit score is between 0 & 100. "
+    st.write("* **The credit score is between 0 & 100. "
              "Clients with a score greater than *36* are at risk of default.**")
-    st.write("**Class 0: client does not default**")
-    st.write("**Class 1: client defaults**")
+    st.write("* **Class 0: client does not default**")
+    st.write("* **Class 1: client defaults**")
     st.write("Client N°{} credit score is **{}**. "
                  "The client is classified as **{}**, "
                  "the credit application is **{}**.".format(customer_id, score,
@@ -190,6 +257,61 @@ def main():
         st.success("Client's loan application is successful :thumbsup:")
     else: 
         st.error("Client's loan application is unsuccessful :thumbsdown:") 
+
+    #visualisation showing score and threshold
+
+    # Feature importance
+    model.predict(np.array(X_norm))
+    features_importance = model.feature_importances_
+    sorted = np.argsort(features_importance)
+    dataviz = pd.DataFrame(columns=['feature', 'importance'])
+    dataviz['feature'] = np.array(X_norm.columns)[sorted]
+    dataviz['importance'] = features_importance[sorted]
+    dataviz = dataviz[dataviz['importance'] > 50]
+    dataviz.reset_index(inplace=True, drop=True)
+    dataviz = dataviz.sort_values(['importance'], ascending=False)
+
+    # SHAP explanations
+    shap.initjs()
+    shap_explainer = shap.TreeExplainer(model)
+    shap_values = shap_explainer.shap_values(X)
+    shap_df = pd.DataFrame(
+        list(zip(X.columns, np.abs(shap_values[0]).mean(0))),
+        columns=['feature', 'importance'])
+    shap_df = shap_df.sort_values(by=['importance'], ascending=False)
+    shap_df.reset_index(inplace=True, drop=True)
+    shap_features = list(shap_df.iloc[0:20, ].feature)
+
+    #plotting global feature importance.
+    st.header("Interprétabilité globale du modèle")
+    fig9 = plt.figure(figsize=(10, 20))
+    sns.barplot(x='importance', y='feature', data=dataviz)
+    st.write("Le RGPD (article 22) prévoit des règles restrictives"
+                 " pour éviter que l’homme ne subisse des décisions"
+                 " émanant uniquement de machines.")
+    st.write("L'interprétabilité globale permet de connaître de manière"
+                 " générale les variables importantes pour le modèle. ")
+    st.write("L’importance des variables ne varie pas"
+                 " en fonction des données de chaque client.")
+    st.write(fig9)
+
+    #plotting local feature importance.
+    st.header("Interprétabilité locale du modèle")
+    fig10 = plt.figure()
+    shap.summary_plot(shap_values, X,
+                        feature_names=list(X.columns),
+                        max_display=50,
+                        plot_type='bar',
+                        plot_size=(5, 15))
+    st.write("Le RGPD (article 22) prévoit des règles restrictives"
+                 " pour éviter que l’homme ne subisse des décisions"
+                 " émanant uniquement de machines.")
+    st.write("SHAP répond aux exigences du RGPD et permet de déterminer"
+                 " les effets des différentes variables dans le résultat de la"
+                 " prédiction du score du client N°{}.".format(customer_id))
+    st.write("L’importance des variables varie en fonction"
+                 "  des données de chaque client.")
+    st.pyplot(fig10)
 
 
 if __name__ == '__main__':
