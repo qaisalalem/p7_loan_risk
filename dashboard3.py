@@ -316,7 +316,7 @@ def main():
     
     
    ###
-    a=X.
+    
     #plotting local feature importance.
     st.header("Interprétabilité locale du modèle")
     fig11 = plt.figure()
