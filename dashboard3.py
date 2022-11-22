@@ -314,7 +314,14 @@ def main():
     st.pyplot(fig10)
     
     
+    
+   ###
+    #plotting local feature importance.
+    st.header("Interprétabilité locale du modèle")
+    fig11 = plt.figure()
+    shap.plots.bar(shap_values[X])
+    st.pyplot(fig11)
 
-
+    
 if __name__ == '__main__':
     main()
