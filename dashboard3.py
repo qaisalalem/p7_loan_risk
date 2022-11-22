@@ -300,7 +300,7 @@ def main():
     fig10 = plt.figure()
     shap.summary_plot(shap_values, X,
                         feature_names=list(X.columns),
-                        max_display=20,
+                        max_display=50,
                         plot_type='bar',
                         plot_size=(5, 15))
     st.write("Le RGPD (article 22) prévoit des règles restrictives"
@@ -313,10 +313,6 @@ def main():
                  "  des données de chaque client.")
     st.pyplot(fig10)
     
-    st.header("2nd interpretability plot")
-    fig13 = plt.figure()
-    shap.plots.bar(shap_values[X])
-    st.pyplot(fig13)
     
 
 
