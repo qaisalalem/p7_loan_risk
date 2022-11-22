@@ -312,6 +312,12 @@ def main():
     st.write("L’importance des variables varie en fonction"
                  "  des données de chaque client.")
     st.pyplot(fig10)
+    
+    st.header("2nd interpretability plot")
+    fig13 = plt.figure()
+    shap.plots.bar(shap_values[X])
+    st.plotly_chart(fig13, use_container_width=True)
+    
 
 
 if __name__ == '__main__':
