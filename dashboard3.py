@@ -319,7 +319,7 @@ def main():
     #plotting local feature importance.
     st.header("Interprétabilité locale du modèle")
     fig11 = plt.figure()
-    shap.plots.bar(shap_values[X])
+    shap.plots.bar(shap_values[iloc[[X]]])
     st.pyplot(fig11)
 
     
