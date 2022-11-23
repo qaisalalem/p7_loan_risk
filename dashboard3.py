@@ -275,7 +275,7 @@ def main():
                                 delta = {'reference': best_threshold, 'increasing': {'color': "red"},'decreasing':{'color':'green'}},
                                 gauge = {'axis': {'range': [0,1], 'tickcolor': color(customer_class)},
                                          'bar': {'color': color(customer_class)},
-                                         'steps': [{'range': [0,th], 'color': 'lightgreen'},
+                                         'steps': [{'range': [0,best_threshold], 'color': 'lightgreen'},
                                                     {'range': [best_threshold,1], 'color': 'lightcoral'}],
                                          'threshold': {'line': {'color': "black", 'width': 5},
                                                        'thickness': 1,
