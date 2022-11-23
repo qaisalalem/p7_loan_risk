@@ -43,7 +43,7 @@ def preprocessing(data, num_imputer, bin_imputer, transformer, scaler):
 
     # Feature selection
     # Categorical features
-    cat_features = list(data.select_dtypes('object').nunique().index)
+    cat_features = list(X_df.select_dtypes('object').nunique().index)
 
     # Encoding categorical features
     df = pd.get_dummies(X_df, columns=cat_features)
