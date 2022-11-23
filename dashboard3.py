@@ -285,10 +285,10 @@ def main():
     
     
     if status=='accepted':
-        original_title = '<p style="font-family:Courier; color:GREEN; font-size:65px; text-align: center;">{}</p>'.format(st.success("Client's loan application is successful :thumbsup:"))
+        original_title = '<p style="font-family:Courier; color:GREEN; font-size:65px; text-align: center;">{}</p>'.format(customer_class,": Client's loan application is successful")
         st.markdown(original_title, unsafe_allow_html=True)
     else :
-        original_title = '<p style="font-family:Courier; color:red; font-size:65px; text-align: center;">{}</p>'.format(st.error("Client's loan application is unsuccessful :thumbsdown:"))
+        original_title = '<p style="font-family:Courier; color:red; font-size:65px; text-align: center;">{}</p>'.format(customer_class,": Client's loan application is unsuccessful")
         st.markdown(original_title, unsafe_allow_html=True)
     
     
