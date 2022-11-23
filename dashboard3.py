@@ -287,7 +287,7 @@ def main():
         original_title = '<p style="font-family:Courier; color:GREEN; font-size:65px; text-align: center;">{}</p>'.format(customer_class)
         st.markdown(original_title, unsafe_allow_html=True)
     else :
-        original_title = '<p style="font-family:Courier; color:red; font-size:65px; text-align: center;">{}</p>'.format(customer_class)
+        original_title = '<p style="font-family:Courier; color:red; font-size:65px; text-align: center;">loan denied {}</p>'.format(customer_class)
         st.markdown(original_title, unsafe_allow_html=True)
     
     
