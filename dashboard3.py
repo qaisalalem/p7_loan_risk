@@ -261,7 +261,7 @@ def main():
 
     #visualisation showing score and threshold
     fig = go.Figure(go.Indicator(mode = "gauge+number+delta",
-                                value = probability_default_payment[0],
+                                value = y_proba,
                                 number = {'font':{'size':48}},
                                 domain = {'x': [0, 1], 'y': [0, 1]},
                                 title = {'text': "Customer's Request Status", 'font': {'size': 28, 'color':color(prediction)}},
