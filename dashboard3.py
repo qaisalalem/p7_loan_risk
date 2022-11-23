@@ -276,7 +276,7 @@ def main():
                                 gauge = {'axis': {'range': [0,100], 'tickcolor': color(customer_class)},
                                          'bar': {'color': color(customer_class)},
                                          'steps': [{'range': [0,(best_threshold *100)], 'color': 'lightgreen'},
-                                                    {'range': [(best_threshold *100),1], 'color': 'lightcoral'}],
+                                                    {'range': [(best_threshold *100),100], 'color': 'lightcoral'}],
                                          'threshold': {'line': {'color': "black", 'width': 5},
                                                        'thickness': 1,
                                                        'value': (best_threshold *100)}}))
