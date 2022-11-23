@@ -260,14 +260,21 @@ def main():
         st.error("Client's loan application is unsuccessful :thumbsdown:") 
 
     #visualisation showing score and threshold
+    def color(status):
+        '''Définition de la couleur selon la prédiction'''
+        if status=='accepted':
+            col='Green'
+        else :
+            col='Red'
+        return col
     fig = go.Figure(go.Indicator(mode = "gauge+number+delta",
                                 value = y_proba,
                                 number = {'font':{'size':48}},
                                 domain = {'x': [0, 1], 'y': [0, 1]},
-                                title = {'text': "Customer's Request Status", 'font': {'size': 28, 'color':color(prediction)}},
+                                title = {'text': "Customer's Request Status", 'font': {'size': 28, 'color':color(customer_class)}},
                                 delta = {'reference': th, 'increasing': {'color': "red"},'decreasing':{'color':'green'}},
-                                gauge = {'axis': {'range': [0,1], 'tickcolor': color(prediction)},
-                                         'bar': {'color': color(prediction)},
+                                gauge = {'axis': {'range': [0,1], 'tickcolor': color(customer_class)},
+                                         'bar': {'color': color(customer_class)},
                                          'steps': [{'range': [0,th], 'color': 'lightgreen'},
                                                     {'range': [th,1], 'color': 'lightcoral'}],
                                          'threshold': {'line': {'color': "black", 'width': 5},
