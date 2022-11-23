@@ -8,6 +8,7 @@ import pandas as pd
 import requests
 import time
 import lightgbm as lgb
+import plotly.graph_objects as go
 
 # Serialization library
 import pickle
@@ -259,6 +260,32 @@ def main():
         st.error("Client's loan application is unsuccessful :thumbsdown:") 
 
     #visualisation showing score and threshold
+    fig = go.Figure(go.Indicator(mode = "gauge+number+delta",
+                                value = probability_default_payment[0],
+                                number = {'font':{'size':48}},
+                                domain = {'x': [0, 1], 'y': [0, 1]},
+                                title = {'text': "Customer's Request Status", 'font': {'size': 28, 'color':color(prediction)}},
+                                delta = {'reference': th, 'increasing': {'color': "red"},'decreasing':{'color':'green'}},
+                                gauge = {'axis': {'range': [0,1], 'tickcolor': color(prediction)},
+                                         'bar': {'color': color(prediction)},
+                                         'steps': [{'range': [0,th], 'color': 'lightgreen'},
+                                                    {'range': [th,1], 'color': 'lightcoral'}],
+                                         'threshold': {'line': {'color': "black", 'width': 5},
+                                                       'thickness': 1,
+                                                       'value': th}}))
+    st.plotly_chart(fig)
+
+
+    #if prediction == "Credit Accorded":
+        #original_title = '<p style="font-family:Courier; color:GREEN; font-size:65px; text-align: center;">{}</p>'.format(prediction)
+        #st.markdown(original_title, unsafe_allow_html=True)
+    #else :
+        #original_title = '<p style="font-family:Courier; color:red; font-size:65px; text-align: center;">{}</p>'.format(prediction)
+        #st.markdown(original_title, unsafe_allow_html=True)
+    
+    
+    
+    
 
     # Feature importance
     model.predict(np.array(X_norm))
