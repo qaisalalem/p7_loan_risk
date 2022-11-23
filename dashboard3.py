@@ -272,14 +272,14 @@ def main():
                                 number = {'font':{'size':48}},
                                 domain = {'x': [0, 1], 'y': [0, 1]},
                                 title = {'text': "Customer's Request Status", 'font': {'size': 28, 'color':color(customer_class)}},
-                                delta = {'reference': th, 'increasing': {'color': "red"},'decreasing':{'color':'green'}},
+                                delta = {'reference': best_threshold, 'increasing': {'color': "red"},'decreasing':{'color':'green'}},
                                 gauge = {'axis': {'range': [0,1], 'tickcolor': color(customer_class)},
                                          'bar': {'color': color(customer_class)},
                                          'steps': [{'range': [0,th], 'color': 'lightgreen'},
-                                                    {'range': [th,1], 'color': 'lightcoral'}],
+                                                    {'range': [best_threshold,1], 'color': 'lightcoral'}],
                                          'threshold': {'line': {'color': "black", 'width': 5},
                                                        'thickness': 1,
-                                                       'value': th}}))
+                                                       'value': best_threshold}}))
     st.plotly_chart(fig)
 
 
