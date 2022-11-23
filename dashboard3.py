@@ -275,11 +275,11 @@ def main():
                                 delta = {'reference': (best_threshold *100), 'increasing': {'color': "red"},'decreasing':{'color':'green'}},
                                 gauge = {'axis': {'range': [0,100], 'tickcolor': color(customer_class)},
                                          'bar': {'color': color(customer_class)},
-                                         'steps': [{'range': [0,best_threshold], 'color': 'lightgreen'},
-                                                    {'range': [best_threshold,1], 'color': 'lightcoral'}],
+                                         'steps': [{'range': [0,(best_threshold *100)], 'color': 'lightgreen'},
+                                                    {'range': [(best_threshold *100),1], 'color': 'lightcoral'}],
                                          'threshold': {'line': {'color': "black", 'width': 5},
                                                        'thickness': 1,
-                                                       'value': best_threshold}}))
+                                                       'value': (best_threshold *100)}}))
     st.plotly_chart(fig)
 
     
