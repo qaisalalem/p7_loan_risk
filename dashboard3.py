@@ -268,7 +268,7 @@ def main():
             col='Red'
         return col
     fig = go.Figure(go.Indicator(mode = "gauge+number+delta",
-                                value = y_proba,
+                                value = score,
                                 number = {'font':{'size':48}},
                                 domain = {'x': [0, 1], 'y': [0, 1]},
                                 title = {'text': "Customer's Request Status", 'font': {'size': 28, 'color':color(customer_class)}},
