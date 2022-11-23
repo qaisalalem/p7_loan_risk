@@ -282,7 +282,7 @@ def main():
                                                        'value': best_threshold}}))
     st.plotly_chart(fig)
 
-    loan_status="
+    
     
     if status=='accepted':
         original_title = '<p style="font-family:Courier; color:GREEN; font-size:65px; text-align: center;">{}</p>'.format(st.success("Client's loan application is successful :thumbsup:"))
