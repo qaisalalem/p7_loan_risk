@@ -52,8 +52,8 @@ def preprocessing(data, num_imputer, bin_imputer, transformer, scaler):
     features_df = df.nunique()
     num_features = list(features_df[features_df != 2].index)
     binary_features = list(features_df[features_df == 2].index)
-    df['NAME_FAMILY_STATUS_Unknown'] = 0
-    binary_features.append('NAME_FAMILY_STATUS_Unknown')
+    #df['NAME_FAMILY_STATUS_Unknown'] = 0
+    #binary_features.append('NAME_FAMILY_STATUS_Unknown')
 
     # Imputations
     X_num = pd.DataFrame(num_imputer.transform(df[num_features]),
