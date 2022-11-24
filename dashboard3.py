@@ -156,7 +156,7 @@ def main():
     
     #Visualisation according to new advice
     #dropdown menu for to graphs, correlation between selected variables
-    variables_list1= list(data.columns)
+    variables_list1= list(X.columns)
     variable1= st.sidebar.selectbox(
         "Please select variable #1 :", variables_list1)
 
