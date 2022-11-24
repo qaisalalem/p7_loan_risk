@@ -43,15 +43,18 @@ def preprocessing(data, num_imputer, bin_imputer, transformer, scaler):
 
     # Feature selection
     # Categorical features
-    cat_features = list(data.select_dtypes('object').nunique().index)
+    
+    numeric_features = list(X_df.select_dtypes('int64').nunique().index)
+    numeric_features.extend(list(X_df.select_dtypes('float64').nunique().index))
+    cat_features = list(X_df.select_dtypes('object').nunique().index)
 
     # Encoding categorical features
     df = pd.get_dummies(X_df, columns=cat_features)
 
     # Numerical and binary features
     features_df = df.nunique()
-    num_features = list(features_df[features_df != 2].index)
-    binary_features = list(df[df == 2].index)
+    num_features = list(numeric_features[numeric_features != 2].index)
+    binary_features = list(numeric_features[numeric_features == 2].index)
     #df['NAME_FAMILY_STATUS_Unknown'] = 0
     #binary_features.append('NAME_FAMILY_STATUS_Unknown')
 
