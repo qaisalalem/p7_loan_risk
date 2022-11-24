@@ -178,7 +178,7 @@ def main():
     #st.write(variable1)
     st.subheader('Graph showing variable 1')
     df = data[variable1] #i managed to select my variable now i need to plot it. this method works, i need to try another method
-    df=[np.log(df)]
+    #df=[np.log(df)]
     
     fig=ff.create_distplot(df, [variable1] , bin_size= 0.3)
     fig.add_vline(x=amt_inc_total, annotation_text=' Selected client')
