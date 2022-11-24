@@ -53,8 +53,8 @@ def preprocessing(data, num_imputer, bin_imputer, transformer, scaler):
 
     # Numerical and binary features
     features_df = df.nunique()
-    num_features = list(numeric_features[numeric_features != 2].index)
-    binary_features = list(numeric_features[numeric_features == 2].index)
+    num_features = list(features_df[features_df != 2].index)
+    binary_features = list(features_df[features_df == 2].index)
     #df['NAME_FAMILY_STATUS_Unknown'] = 0
     #binary_features.append('NAME_FAMILY_STATUS_Unknown')
 
