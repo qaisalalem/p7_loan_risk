@@ -155,8 +155,9 @@ def main():
     
     
     #Visualisation according to new advice
+    datavisiual=data.drop(['SK_ID_CURR'], axis=1)
     #dropdown menu for to graphs, correlation between selected variables
-    variables_list1= list(X_df.columns)
+    variables_list1= list(datavisiual.columns)
     variable1= st.sidebar.selectbox(
         "Please select variable #1 :", variables_list1)
 
