@@ -59,8 +59,8 @@ def preprocessing(data, num_imputer, bin_imputer, transformer, scaler):
     #binary_features.append('NAME_FAMILY_STATUS_Unknown')
 
     # Imputations
-    X_num = pd.DataFrame(num_imputer.transform(df[numeric_features]),
-                         columns=numeric_features)
+    X_num = pd.DataFrame(num_imputer.transform(df[num_features]),
+                         columns=num_features)
     X_bin = pd.DataFrame(bin_imputer.transform(df[binary_features]),
                          columns=binary_features)
 
