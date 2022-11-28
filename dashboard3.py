@@ -150,8 +150,25 @@ def main():
     st.write(viz_df)
 
     # Preprocessed customer data for prediction
+    relevant_features= ['POS_SK_DPD_DEF','BUR_DAYS_CREDIT_ENDDATE','BUR_AMT_CREDIT_SUM','BUR_AMT_CREDIT_SUM_DEBT',
+                        'BUR_AMT_CREDIT_SUM_OVERDUE','BUR_DAYS_CREDIT_UPDATE','PAY_HIST_NUM_INSTALMENT_VERSION',
+                        'PAY_HIST_NUM_INSTALMENT_NUMBER','PAY_HIST_DAYS_INSTALMENT','PAY_HIST_AMT_INSTALMENT',
+                        'POS_CNT_INSTALMENT','POS_SK_DPD','NAME_EDUCATION_TYPE_Secondary / secondary special',
+                        'PREV_APPLICATION_NUMBER','PREV_AMT_ANNUITY','PREV_AMT_DOWN_PAYMENT',
+                        'PREV_AMT_CREDIT','PREV_RATE_DOWN_PAYMENT','PREV_CNT_PAYMENT',
+                        'NAME_CONTRACT_TYPE','FLAG_OWN_CAR','NAME_EDUCATION_TYPE_Higher education',
+                        'REG_CITY_NOT_LIVE_CITY','CODE_GENDER_F','NAME_FAMILY_STATUS_Married',
+                        'BUR_DAYS_CREDIT','BUR_CNT_CREDIT_PROLONG','REGION_RATING_CLIENT',
+                        'DAYS_EMPLOYED','DAYS_REGISTRATION','DAYS_ID_PUBLISH',
+                        'PAYMENT_RATE','HOUR_APPR_PROCESS_START','EXT_SOURCE_2',
+                        'EXT_SOURCE_3','OBS_30_CNT_SOCIAL_CIRCLE','DEF_30_CNT_SOCIAL_CIRCLE',
+                        'DAYS_LAST_PHONE_CHANGE','AMT_ANNUITY','AMT_CREDIT',
+                        'AMT_INCOME_TOTAL','AMT_REQ_CREDIT_BUREAU_QRT','AMT_REQ_CREDIT_BUREAU_YEAR',
+                        'ANNUITY_INCOME_RATE','INCOME_CREDIT_RATE','DAYS_BIRTH',
+                        'REGION_POPULATION_RELATIVE']
     X = norm_df[norm_df.SK_ID_CURR == customer_id]
     X = X.drop(['SK_ID_CURR'], axis=1)
+    X= X[relevant_features]
     
     
     #Visualisation according to new advice
