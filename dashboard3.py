@@ -191,6 +191,76 @@ def main():
     dash['AGE']= dash.AGE.abs().astype('int64')
     
     
+    
+    
+    
+    st.header('''Credit application result''')
+    #prediction
+    y_proba = model.predict_proba(np.array(X))[0][1]
+
+    # Looking for the customer situation (class 0 or 1)
+    # by using the best threshold from precision-recall curve
+    y_class = round(y_proba, 2)
+    best_threshold = 0.36
+    customer_class = np.where(y_class > best_threshold, 1, 0)
+
+    # Customer score calculation
+    score = int(y_class * 100)
+
+    # Customer credit application result
+    if customer_class == 1:
+        result = 'at risk of default'
+        status = 'refused'
+    else:
+        result = 'no risk of default'
+        status = 'accepted'
+    
+    #prediction
+    st.write("* **The credit score is between 0 & 100. "
+             "Clients with a score greater than *36* are at risk of default.**")
+    st.write("* **Class 0: client does not default**")
+    st.write("* **Class 1: client defaults**")
+    st.write("Client N°{} credit score is **{}**. "
+                 "The client is classified as **{}**, "
+                 "the credit application is **{}**.".format(customer_id, score,
+                                                       customer_class, status))
+    if customer_class == 0: 
+        st.success("Client's loan application is successful :thumbsup:")
+    else: 
+        st.error("Client's loan application is unsuccessful :thumbsdown:") 
+
+    #visualisation showing score and threshold
+    def color(status):
+        '''Définition de la couleur selon la prédiction'''
+        if status=='accepted':
+            col='Green'
+        else :
+            col='Red'
+        return col
+    fig = go.Figure(go.Indicator(mode = "gauge+number+delta",
+                                value = score,
+                                number = {'font':{'size':48}},
+                                domain = {'x': [0, 1], 'y': [0, 1]},
+                                title = {'text': "Customer's Request Status", 'font': {'size': 28, 'color':color(customer_class)}},
+                                delta = {'reference': (best_threshold *100), 'increasing': {'color': "red"},'decreasing':{'color':'green'}},
+                                gauge = {'axis': {'range': [0,100], 'tickcolor': color(customer_class)},
+                                         'bar': {'color': color(customer_class)},
+                                         'steps': [{'range': [0,(best_threshold *100)], 'color': 'lightgreen'},
+                                                    {'range': [(best_threshold *100),100], 'color': 'lightcoral'}],
+                                         'threshold': {'line': {'color': "black", 'width': 5},
+                                                       'thickness': 1,
+                                                       'value': (best_threshold *100)}}))
+    st.plotly_chart(fig)
+
+    
+    
+    if status=='accepted':
+        original_title = '<p style="font-family:Courier; color:GREEN; font-size:65px; text-align: center;">Loan is accepted</p>'#.format()
+        st.markdown(original_title, unsafe_allow_html=True)
+    else :
+        original_title = '<p style="font-family:Courier; color:red; font-size:65px; text-align: center;">Loan is refused</p>'#.format()
+        st.markdown(original_title, unsafe_allow_html=True)
+    
     #dropdown menu for to graphs, correlation between selected variables
     variables_list1= list(dash.columns)
     variable1= st.sidebar.selectbox(
@@ -268,74 +338,7 @@ def main():
 
 
 
-    st.header('''Credit application result''')
 
-
-    #prediction
-    y_proba = model.predict_proba(np.array(X))[0][1]
-
-    # Looking for the customer situation (class 0 or 1)
-    # by using the best threshold from precision-recall curve
-    y_class = round(y_proba, 2)
-    best_threshold = 0.36
-    customer_class = np.where(y_class > best_threshold, 1, 0)
-
-    # Customer score calculation
-    score = int(y_class * 100)
-
-    # Customer credit application result
-    if customer_class == 1:
-        result = 'at risk of default'
-        status = 'refused'
-    else:
-        result = 'no risk of default'
-        status = 'accepted'
-    
-    #prediction
-    st.write("* **The credit score is between 0 & 100. "
-             "Clients with a score greater than *36* are at risk of default.**")
-    st.write("* **Class 0: client does not default**")
-    st.write("* **Class 1: client defaults**")
-    st.write("Client N°{} credit score is **{}**. "
-                 "The client is classified as **{}**, "
-                 "the credit application is **{}**.".format(customer_id, score,
-                                                       customer_class, status))
-    if customer_class == 0: 
-        st.success("Client's loan application is successful :thumbsup:")
-    else: 
-        st.error("Client's loan application is unsuccessful :thumbsdown:") 
-
-    #visualisation showing score and threshold
-    def color(status):
-        '''Définition de la couleur selon la prédiction'''
-        if status=='accepted':
-            col='Green'
-        else :
-            col='Red'
-        return col
-    fig = go.Figure(go.Indicator(mode = "gauge+number+delta",
-                                value = score,
-                                number = {'font':{'size':48}},
-                                domain = {'x': [0, 1], 'y': [0, 1]},
-                                title = {'text': "Customer's Request Status", 'font': {'size': 28, 'color':color(customer_class)}},
-                                delta = {'reference': (best_threshold *100), 'increasing': {'color': "red"},'decreasing':{'color':'green'}},
-                                gauge = {'axis': {'range': [0,100], 'tickcolor': color(customer_class)},
-                                         'bar': {'color': color(customer_class)},
-                                         'steps': [{'range': [0,(best_threshold *100)], 'color': 'lightgreen'},
-                                                    {'range': [(best_threshold *100),100], 'color': 'lightcoral'}],
-                                         'threshold': {'line': {'color': "black", 'width': 5},
-                                                       'thickness': 1,
-                                                       'value': (best_threshold *100)}}))
-    st.plotly_chart(fig)
-
-    
-    
-    if status=='accepted':
-        original_title = '<p style="font-family:Courier; color:GREEN; font-size:65px; text-align: center;">Loan is accepted</p>'#.format()
-        st.markdown(original_title, unsafe_allow_html=True)
-    else :
-        original_title = '<p style="font-family:Courier; color:red; font-size:65px; text-align: center;">Loan is refused</p>'#.format()
-        st.markdown(original_title, unsafe_allow_html=True)
     
     
     
