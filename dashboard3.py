@@ -204,14 +204,14 @@ def main():
     #fig_a = ff.create_distplot(x_a,['AMT_INCOME_TOTAL'], bin_size=0.3)
     #fig_a.add_vline(x=amt_inc_total, annotation_text=' Selected client')
     #st.plotly_chart(fig_a, use_container_width=True)
-
+    st.set_option('deprecation.showPyplotGlobalUse', False)
     #visualisation fig 1
     # create histograms
     st.sidebar.subheader("Histogram")
     
     #histogram_slider = st.sidebar.slider(label="Number of Bins",min_value=5, max_value=100, value=30)
-    fig1 =sns.distplot(dash[variable1], bins=30)
-    st.pyplot(fig1)
+    sns.distplot(dash[variable1], bins=30)
+    st.pyplot()
 
     #st.pyplot(fig)
     #st.write(variable1)
