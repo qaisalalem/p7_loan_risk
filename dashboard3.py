@@ -88,24 +88,7 @@ def load_model(file, key):
 
 
 
-def customer_description(data):
-    """This function creates a dataframe with customer descriptions."""
-    df = pd.DataFrame(
-        columns=['Gender', 'Age (years)', 'Family status',
-                 'Number of children', 'Days employed',
-                 'Income ($)', 'Credit amount ($)', 'Loan annuity ($)'])
-    data['AGE'] = data['DAYS_BIRTH'] / 365
-    df['Customer ID'] = list(data.SK_ID_CURR.astype(str))
-    df['Gender'] = list(data.CODE_GENDER)
-    df['Age (years)'] = list(data.AGE.abs().astype('int64'))
-    df['Family status'] = list(data.NAME_FAMILY_STATUS)
-    df['Number of children'] = list(data.CNT_CHILDREN.astype('int64'))
-    df['Days employed'] = list(data.DAYS_EMPLOYED.abs().astype('int64'))
-    df['Income ($)'] = list(data.AMT_INCOME_TOTAL.astype('int64'))
-    df['Credit amount ($)'] = list(data.AMT_CREDIT.astype('int64'))
-    df['Loan annuity ($)'] = list(data.AMT_ANNUITY.astype('int64'))
-    df['Organization type'] = list(data.ORGANIZATION_TYPE)
-    return df
+
 
 
 def main():
