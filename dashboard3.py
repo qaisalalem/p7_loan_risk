@@ -211,20 +211,17 @@ def main():
     #visualisation fig 1
     st.subheader('Graph showing variable 1')
     a=sns.distplot(dash[variable1], bins=30)
-    a.axvline(x=amt_inc_total)
-    
+    a.axvline(x=amt_inc_total)  
     st.pyplot()
 
-    #st.pyplot(fig)
-    #st.write(variable1)
     
     
     
 
     #Visualisation fig 2
     st.subheader('Graph showing variable 2')
-    a=sns.distplot(dash[variable2], bins=30)
-    a.axvline(x=amt_inc_total)
+    b=sns.distplot(dash[variable2], bins=30)
+    b.axvline(x=amt_inc_total)
     st.pyplot()
     #df2=data[variable2]
     #df2=[np.log(df2)]
@@ -258,8 +255,9 @@ def main():
 
     #df3=[v for v in df3 if not m.isnan(v) and not m.isinf(v)] 
     
-    #st.subheader('Graph showing scatterplot between the 2 selected variables')
-    #fig_c=sns.scatterplot(x=df, y=df2)
+    st.subheader('Graph showing scatterplot between the 2 selected variables')
+    c=sns.scatterplot(x=dash[variable1], y=dash[variable2])
+    st.pyplot()
     #fig_c.add_vline(x=amt_inc_total, annotation_text=' Selected client')
     #st.plotly_chart(fig_c, use_container_width=True)
 
