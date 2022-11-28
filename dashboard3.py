@@ -394,11 +394,7 @@ def main():
                  "  des données de chaque client.")
     st.pyplot(fig10)
 
-    
-    # waterfall plot
-    
-    shap.plots.waterfall(shap_values[0])
-    st.pyplot()
+
     
 if __name__ == '__main__':
     main()
