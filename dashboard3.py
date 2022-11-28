@@ -297,37 +297,7 @@ def main():
     b=sns.distplot(dash[variable2], bins=30)
     b.axvline(x=amt_inc_total2)
     st.pyplot()
-    #df2=data[variable2]
-    #df2=[np.log(df2)]
-    #st.subheader('Graph showing variable 2')
-    #fig_b=ff.create_distplot(df2, [variable2] , bin_size= 0.3)
-    #fig_b.add_vline(x=amt_inc_total, annotation_text=' Selected client')
-    #st.plotly_chart(fig_b, use_container_width=True)
-    
-    #dataframe=norm_df.copy(deep=True)
-    #dataframe=dataframe.select_dtypes(include=['float64', 'int64'], exclude='bool')
-    #dataframe=dataframe.replace([np.inf, -np.inf], np.nan)
-
-    #st.write(dataframe)
-    #trying to display processed data as figures.
- #   variables_list3= list(dataframe.columns)
- #   variable3= st.sidebar.selectbox(
-  #      "Please select variable #3 :", variables_list3)
-
-#####TypeError: Cannot compare types 'ndarray(dtype=object)' and 'float'
- 
- #   df3=dataframe[variable3]
-    #df3=[df3]
- #   df3=[np.log(df3)]
- #   df3=pd.Series(df3)
-    #df3=df3.transform(np.log)
-    #st.write(dataframe)
-  #  df3=df3.dropna(inplace=True)
-    #df3.replace([np.inf, -np.inf], np.nan, inplace=True)
-    #df3.dropna(inplace=True)
-    #df3=df3[df3.replace([np.inf, -np.inf], np.nan).notnull().all(axis=1)] 
-
-    #df3=[v for v in df3 if not m.isnan(v) and not m.isinf(v)] 
+   
     
     st.subheader('Graph showing scatterplot between the 2 selected variables')
     c=sns.scatterplot(x=dash[variable1], y=dash[variable2])
@@ -338,11 +308,7 @@ def main():
 
 
 
-    
-    
-    
-    
-
+  
     # Feature importance
     model.predict(np.array(X_norm[relevant_features]))
     features_importance = model.feature_importances_
