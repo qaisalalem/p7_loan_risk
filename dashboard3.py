@@ -206,7 +206,7 @@ def main():
     #st.plotly_chart(fig_a, use_container_width=True)
 
     #visualisation fig 1
-    
+    st.bar_chart(dash[variable1])
     #st.write(variable1)
     st.subheader('Graph showing variable 1')
     df = dash[variable1] #i managed to select my variable now i need to plot it. this method works, i need to try another method
