@@ -305,34 +305,23 @@ def main():
     shap_features = list(shap_df.iloc[0:20, ].feature)
 
     #plotting global feature importance.
-    st.header("Interprétabilité globale du modèle")
+    st.header("Global Interpretability")
     fig9 = plt.figure(figsize=(10, 10))
     sns.barplot(x='importance', y='feature', data=dataviz)
-    st.write("Le RGPD (article 22) prévoit des règles restrictives"
-                 " pour éviter que l’homme ne subisse des décisions"
-                 " émanant uniquement de machines.")
-    st.write("L'interprétabilité globale permet de connaître de manière"
-                 " générale les variables importantes pour le modèle. ")
-    st.write("L’importance des variables ne varie pas"
-                 " en fonction des données de chaque client.")
+    st.write("This level of interpretability is about understanding how the model makes decisions, based on a holistic view of its features.")
+    st.write("This stays the same for all clients")
     st.write(fig9)
 
     #plotting local feature importance.
-    st.header("Interprétabilité locale du modèle")
+    st.header("Local Interpretability")
     fig10 = plt.figure()
     shap.summary_plot(shap_values, X,
                         feature_names=list(X.columns),
                         max_display=15,
                         plot_type='bar',
                         plot_size=(5, 5))
-    st.write("Le RGPD (article 22) prévoit des règles restrictives"
-                 " pour éviter que l’homme ne subisse des décisions"
-                 " émanant uniquement de machines.")
-    st.write("SHAP répond aux exigences du RGPD et permet de déterminer"
-                 " les effets des différentes variables dans le résultat de la"
-                 " prédiction du score du client N°{}.".format(customer_id))
-    st.write("L’importance des variables varie en fonction"
-                 "  des données de chaque client.")
+    st.write("This level of interpretability is about understanding a single prediction of a model.")
+    st.write("This is unique for each client.")
     st.pyplot(fig10)
 
 
