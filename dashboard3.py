@@ -193,7 +193,7 @@ def main():
         "Please select variable #1 :", variables_list1)
 
 
-    variables_list2= list(data.columns)
+    variables_list2= list(dash.columns)
     variable2= st.sidebar.selectbox(
         "Please select variable #2 :", variables_list2)
 
