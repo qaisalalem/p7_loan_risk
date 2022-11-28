@@ -185,6 +185,8 @@ def main():
     dash['AMT_ANNUITY']=np.log(dash['AMT_ANNUITY']+1)
     dash['AMT_CREDIT']=np.log(dash['AMT_CREDIT']+1)
     dash['DAYS_EMPLOYED']=np.sqrt(dash['DAYS_EMPLOYED']*-1)
+    dash['AGE'] = dash['DAYS_BIRTH'] / 365
+    dash.AGE.abs().astype('int64')
     
     
     #dropdown menu for to graphs, correlation between selected variables
