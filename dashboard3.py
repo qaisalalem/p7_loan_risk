@@ -338,7 +338,7 @@ def main():
         columns=['feature', 'importance'])
     shap_df = shap_df.sort_values(by=['importance'], ascending=False)
     shap_df.reset_index(inplace=True, drop=True)
-    shap_features = list(shap_df.iloc[0:10, ].feature)
+    shap_features = list(shap_df.iloc[0:20, ].feature)
 
     #plotting global feature importance.
     st.header("Interprétabilité globale du modèle")
@@ -360,7 +360,7 @@ def main():
                         feature_names=list(X.columns),
                         max_display=15,
                         plot_type='bar',
-                        plot_size=(5, 10))
+                        plot_size=(5, 5))
     st.write("Le RGPD (article 22) prévoit des règles restrictives"
                  " pour éviter que l’homme ne subisse des décisions"
                  " émanant uniquement de machines.")
