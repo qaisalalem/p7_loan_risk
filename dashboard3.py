@@ -207,14 +207,18 @@ def main():
 
     #visualisation fig 1
     
+
+    #st.pyplot(fig)
     #st.write(variable1)
     st.subheader('Graph showing variable 1')
     df = dash[variable1] #i managed to select my variable now i need to plot it. this method works, i need to try another method
-    df=[df]
+    #df=[df]
+    fig, ax = plt.subplots()
+    ax.hist(df, bins=20)
     #df=[np.log(df)]
     #st.write(dash.head())
-    fig, ax = plt.subplots()
-    fig=ff.create_distplot(df, [variable1], bin_size= 0.3)
+    #fig, ax = plt.subplots()
+    #fig=ff.create_distplot(df, [variable1], bin_size= 0.3)
     fig.add_vline(x=amt_inc_total, annotation_text=' Selected client')
     st.plotly_chart(fig, use_container_width=True)
     st.pyplot(fig)
