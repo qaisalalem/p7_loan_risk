@@ -207,37 +207,29 @@ def main():
     #st.plotly_chart(fig_a, use_container_width=True)
     st.set_option('deprecation.showPyplotGlobalUse', False)
     #visualisation fig 1
-    # create histograms
     
+    st.subheader('Graph showing variable 1')
     a=sns.distplot(dash[variable1], bins=30)
     a.axvline(x=amt_inc_total)
     st.pyplot()
 
     #st.pyplot(fig)
     #st.write(variable1)
-    st.subheader('Graph showing variable 1')
-    #df = dash[variable1] #i managed to select my variable now i need to plot it. this method works, i need to try another method
-    #df=[df]
-    #fig, ax = plt.subplots()
-    #ax.hist(df, bins=20)
-    #df=[np.log(df)]
-    #st.write(dash.head())
-    #fig, ax = plt.subplots()
-    #fig=ff.create_distplot(df, [variable1], bin_size= 0.3)
-    #fig.add_vline(x=amt_inc_total, annotation_text=' Selected client')
-    #st.plotly_chart(fig, use_container_width=True)
-    #st.pyplot(fig)
+    
     
     
 
     #Visualisation fig 2
-    df2=data[variable2]
-    df2=[np.log(df2)]
-    #df2=pd.Series(df2)
     st.subheader('Graph showing variable 2')
-    fig_b=ff.create_distplot(df2, [variable2] , bin_size= 0.3)
-    fig_b.add_vline(x=amt_inc_total, annotation_text=' Selected client')
-    st.plotly_chart(fig_b, use_container_width=True)
+    a=sns.distplot(dash[variable2], bins=30)
+    a.axvline(x=amt_inc_total)
+    st.pyplot()
+    #df2=data[variable2]
+    #df2=[np.log(df2)]
+    #st.subheader('Graph showing variable 2')
+    #fig_b=ff.create_distplot(df2, [variable2] , bin_size= 0.3)
+    #fig_b.add_vline(x=amt_inc_total, annotation_text=' Selected client')
+    #st.plotly_chart(fig_b, use_container_width=True)
     
     #dataframe=norm_df.copy(deep=True)
     #dataframe=dataframe.select_dtypes(include=['float64', 'int64'], exclude='bool')
