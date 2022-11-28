@@ -210,7 +210,7 @@ def main():
     #st.write(variable1)
     st.subheader('Graph showing variable 1')
     df = dash[variable1] #i managed to select my variable now i need to plot it. this method works, i need to try another method
-    df=[[df]]
+    df=[df]
     #df=[np.log(df)]
     #st.write(dash.head())
     fig=ff.create_distplot(df, [variable1], bin_size= 0.3)
