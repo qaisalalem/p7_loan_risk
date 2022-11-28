@@ -209,7 +209,7 @@ def main():
     # create histograms
     
     sns.distplot(dash[variable1], bins=30)
-    sns.add_vline(x=amt_inc_total, annotation_text=' Selected client')
+    plt.axvline(x=amt_inc_total, annotation_text=' Selected client')
     st.pyplot()
 
     #st.pyplot(fig)
