@@ -145,12 +145,6 @@ def main():
         "Please select client ID :", customers_list)
     
     # Customer data
-    customer_df = data[data.SK_ID_CURR == customer_id]
-    viz_df = customer_df.round(2)
-    st.write(viz_df)
-    st.write(data[relevant_features])
-
-    # Preprocessed customer data for prediction
     relevant_features= ['POS_SK_DPD_DEF','BUR_DAYS_CREDIT_ENDDATE','BUR_AMT_CREDIT_SUM','BUR_AMT_CREDIT_SUM_DEBT',
                         'BUR_AMT_CREDIT_SUM_OVERDUE','BUR_DAYS_CREDIT_UPDATE','PAY_HIST_NUM_INSTALMENT_VERSION',
                         'PAY_HIST_NUM_INSTALMENT_NUMBER','PAY_HIST_DAYS_INSTALMENT','PAY_HIST_AMT_INSTALMENT',
@@ -167,7 +161,12 @@ def main():
                         'AMT_INCOME_TOTAL','AMT_REQ_CREDIT_BUREAU_QRT','AMT_REQ_CREDIT_BUREAU_YEAR',
                         'ANNUITY_INCOME_RATE','INCOME_CREDIT_RATE','DAYS_BIRTH',
                         'REGION_POPULATION_RELATIVE']
-    
+    customer_df = data[data.SK_ID_CURR == customer_id]
+    viz_df = customer_df.round(2)
+    st.write(viz_df)
+    st.write(data[relevant_features])
+
+    # Preprocessed customer data for prediction
     X = norm_df[norm_df.SK_ID_CURR == customer_id]
     
     X = X.drop(['SK_ID_CURR'], axis=1)
