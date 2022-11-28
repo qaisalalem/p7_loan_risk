@@ -325,7 +325,7 @@ def main():
     dataviz = pd.DataFrame(columns=['feature', 'importance'])
     dataviz['feature'] = np.array(X_norm[relevant_features].columns)[sorted]
     dataviz['importance'] = features_importance[sorted]
-    dataviz = dataviz[dataviz['importance'] > 50]
+    dataviz = dataviz[dataviz['importance'] > 10]
     dataviz.reset_index(inplace=True, drop=True)
     dataviz = dataviz.sort_values(['importance'], ascending=False)
 
@@ -338,7 +338,7 @@ def main():
         columns=['feature', 'importance'])
     shap_df = shap_df.sort_values(by=['importance'], ascending=False)
     shap_df.reset_index(inplace=True, drop=True)
-    shap_features = list(shap_df.iloc[0:20, ].feature)
+    shap_features = list(shap_df.iloc[0:10, ].feature)
 
     #plotting global feature importance.
     st.header("Interprétabilité globale du modèle")
