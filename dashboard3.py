@@ -206,12 +206,13 @@ def main():
     #fig_a.add_vline(x=amt_inc_total, annotation_text=' Selected client')
     #st.plotly_chart(fig_a, use_container_width=True)
     st.set_option('deprecation.showPyplotGlobalUse', False)
-    #visualisation fig 1
     
+    
+    #visualisation fig 1
     st.subheader('Graph showing variable 1')
     a=sns.distplot(dash[variable1], bins=30)
-    a.axvline(x=amt_inc_total)
-    a.text(amt_inc_total,'selected client',va='top',rotation=90)
+    a.axvline(x=amt_inc_total,'selected client')
+    
     st.pyplot()
 
     #st.pyplot(fig)
