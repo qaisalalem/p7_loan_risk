@@ -221,7 +221,7 @@ def main():
     #fig=ff.create_distplot(df, [variable1], bin_size= 0.3)
     #fig.add_vline(x=amt_inc_total, annotation_text=' Selected client')
     st.plotly_chart(fig, use_container_width=True)
-    st.pyplot(fig)
+    #st.pyplot(fig)
     
     
 
