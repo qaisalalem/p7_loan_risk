@@ -207,15 +207,14 @@ def main():
 
     #visualisation fig 1
     
-    fig=sns.histplot(data=dash, [variable1], bins=50)
     #st.write(variable1)
     st.subheader('Graph showing variable 1')
     #df = dash[variable1] #i managed to select my variable now i need to plot it. this method works, i need to try another method
     #df=[np.log(df)]
     #st.write(dash.head())
-    #fig=ff.create_distplot(dash, variable1 , bin_size= 0.3)
-    #fig.add_vline(x=amt_inc_total, annotation_text=' Selected client')
-    #st.plotly_chart(fig, use_container_width=True)
+    fig=ff.create_distplot(dash, [variable1], bin_size= 0.3)
+    fig.add_vline(x=amt_inc_total, annotation_text=' Selected client')
+    st.plotly_chart(fig, use_container_width=True)
     st.pyplot(fig)
     
     
