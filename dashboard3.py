@@ -211,7 +211,7 @@ def main():
     st.subheader('Graph showing variable 1')
     a=sns.distplot(dash[variable1], bins=30)
     a.axvline(x=amt_inc_total)
-    a.text(amt_inc_total,va='top','selected client',rotation='vertical')
+    a.text(amt_inc_total,va='top',rotation='vertical','selected client')
     st.pyplot()
 
     #st.pyplot(fig)
