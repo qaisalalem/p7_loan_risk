@@ -173,6 +173,13 @@ def main():
     
     #Visualisation according to new advice
     datavisiual=data.drop(['SK_ID_CURR'], axis=1)
+    importantvar=['PAYMENT_RATE','DAYS_BIRTH','EXT_SOURCE_2',
+                  'EXT_SOURCE_3','PAY_HIST_DAYS_INSTALMENT','AMT_INCOME_TOTAL',
+                  'AMT_ANNUITY','AMT_CREDIT','PREV_AMT_ANNUITY','ANNUITY_INCOME_RATE'
+                 ]
+    datavisiual=datavisiual[importantvar]
+    
+    
     #dropdown menu for to graphs, correlation between selected variables
     variables_list1= list(datavisiual.columns)
     variable1= st.sidebar.selectbox(
