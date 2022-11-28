@@ -397,7 +397,7 @@ def main():
     
     # waterfall plot
     
-    shap.plots.waterfall(shap_valuess[0])
+    shap.plots.waterfall(shap_values[0])
     st.pyplot()
     
 if __name__ == '__main__':
