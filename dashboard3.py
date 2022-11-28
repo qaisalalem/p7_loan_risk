@@ -207,10 +207,9 @@ def main():
     st.set_option('deprecation.showPyplotGlobalUse', False)
     #visualisation fig 1
     # create histograms
-    st.sidebar.subheader("Histogram")
     
-    #histogram_slider = st.sidebar.slider(label="Number of Bins",min_value=5, max_value=100, value=30)
     sns.distplot(dash[variable1], bins=30)
+    sns.add_vline(x=amt_inc_total, annotation_text=' Selected client')
     st.pyplot()
 
     #st.pyplot(fig)
