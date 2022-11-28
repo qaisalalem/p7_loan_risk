@@ -206,7 +206,7 @@ def main():
     #st.plotly_chart(fig_a, use_container_width=True)
 
     #visualisation fig 1
-    st.bar_chart(data=dash, *, x=variable1, y=None, width=0, height=0, use_container_width=True)
+    st.bar_chart(data=dash, x=variable1, y=None, width=0, height=0, use_container_width=True)
     #st.bar_chart(dash[variable1])
     #st.write(variable1)
     st.subheader('Graph showing variable 1')
