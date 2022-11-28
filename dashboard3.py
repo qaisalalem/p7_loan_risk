@@ -399,6 +399,7 @@ def main():
     explainer = shap.TreeExplainer(model, X, check_additivity=False)
     shap_valuess = explainer(X)
     shap.plots.waterfall(shap_valuess[0])
+    st.pyplot()
     
 if __name__ == '__main__':
     main()
