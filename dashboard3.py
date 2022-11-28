@@ -183,7 +183,7 @@ def main():
     # Looking for the customer situation (class 0 or 1)
     # by using the best threshold from precision-recall curve
     y_class = round(y_proba, 2)
-    best_threshold = 0.36
+    best_threshold = 0.37
     customer_class = np.where(y_class > best_threshold, 1, 0)
 
     # Customer score calculation
@@ -199,7 +199,7 @@ def main():
     
     #prediction
     st.write("* **The credit score is between 0 & 100. "
-             "Clients with a score greater than *36* are at risk of default.**")
+             "Clients with a score greater than *37* are at risk of default.**")
     st.write("* **Class 0: client does not default**")
     st.write("* **Class 1: client defaults**")
     st.write("Client N°{} credit score is **{}**. "
