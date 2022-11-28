@@ -164,7 +164,6 @@ def main():
     customer_df = data[data.SK_ID_CURR == customer_id]
     viz_df = customer_df.round(2)
     st.write(viz_df)
-    st.write(data[relevant_features])
 
     # Preprocessed customer data for prediction
     X = norm_df[norm_df.SK_ID_CURR == customer_id]
