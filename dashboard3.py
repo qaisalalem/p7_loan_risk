@@ -210,8 +210,8 @@ def main():
     st.sidebar.subheader("Histogram")
     
     #histogram_slider = st.sidebar.slider(label="Number of Bins",min_value=5, max_value=100, value=30)
-    sns.distplot(dash[variable1], bins=30)
-    st.pyplot()
+    fig1 =sns.distplot(dash[variable1], bins=30)
+    st.pyplot(fig1)
 
     #st.pyplot(fig)
     #st.write(variable1)
