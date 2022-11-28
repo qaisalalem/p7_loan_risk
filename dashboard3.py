@@ -172,13 +172,13 @@ def main():
     
     
     #Visualisation according to new advice
-    datavisiual=data.drop(['SK_ID_CURR'], axis=1)
+    dash=data.drop(['SK_ID_CURR'], axis=1)
     importantvar=['PAYMENT_RATE','DAYS_BIRTH','EXT_SOURCE_2',
                   'EXT_SOURCE_3','PAY_HIST_DAYS_INSTALMENT','AMT_INCOME_TOTAL',
                   'AMT_ANNUITY','AMT_CREDIT','PREV_AMT_ANNUITY','ANNUITY_INCOME_RATE',
                   'DAYS_EMPLOYED'
                  ]
-    dash=datavisiual[importantvar]
+    dash=dash[importantvar]
     dash['AMT_INCOME_TOTAL']=np.log(dash['AMT_INCOME_TOTAL']+1)
     dash['ANNUITY_INCOME_RATE']=np.log(dash['ANNUITY_INCOME_RATE']+1)
     dash['PREV_AMT_ANNUITY']=np.log(dash['PREV_AMT_ANNUITY']+1)
@@ -208,10 +208,10 @@ def main():
     #visualisation fig 1
     #st.write(variable1)
     st.subheader('Graph showing variable 1')
-    #df = dash[variable1] #i managed to select my variable now i need to plot it. this method works, i need to try another method
+    df = dash[variable1] #i managed to select my variable now i need to plot it. this method works, i need to try another method
     #df=[np.log(df)]
     st.write(dash.head())
-    fig=ff.create_distplot(dash, variable1 , bin_size= 0.3)
+    fig=ff.create_distplot(df, variable1 , bin_size= 0.3)
     fig.add_vline(x=amt_inc_total, annotation_text=' Selected client')
     st.plotly_chart(fig, use_container_width=True)
 
