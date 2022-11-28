@@ -338,7 +338,7 @@ def main():
         columns=['feature', 'importance'])
     shap_df = shap_df.sort_values(by=['importance'], ascending=False)
     shap_df.reset_index(inplace=True, drop=True)
-    shap_features = list(shap_df.iloc[0:9, ].feature)
+    shap_features = list(shap_df.iloc[0:10, ].feature)
 
     #plotting global feature importance.
     st.header("Interprétabilité globale du modèle")
@@ -356,9 +356,9 @@ def main():
     #plotting local feature importance.
     st.header("Interprétabilité locale du modèle")
     fig10 = plt.figure()
-    shap.summary_plot(shap_values, X[relevant_features],
-                        feature_names=list(X[relevant_features].columns),
-                        max_display=50,
+    shap.summary_plot(shap_values, X,
+                        feature_names=list(X.columns),
+                        max_display=15,
                         plot_type='bar',
                         plot_size=(5, 15))
     st.write("Le RGPD (article 22) prévoit des règles restrictives"
