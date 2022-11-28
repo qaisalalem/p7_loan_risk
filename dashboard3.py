@@ -319,11 +319,11 @@ def main():
     
 
     # Feature importance
-    model.predict(np.array(X_norm))
+    model.predict(np.array(X_norm[relevant_features]))
     features_importance = model.feature_importances_
     sorted = np.argsort(features_importance)
     dataviz = pd.DataFrame(columns=['feature', 'importance'])
-    dataviz['feature'] = np.array(X_norm.columns)[sorted]
+    dataviz['feature'] = np.array(X_norm[relevant_features].columns)[sorted]
     dataviz['importance'] = features_importance[sorted]
     dataviz = dataviz[dataviz['importance'] > 50]
     dataviz.reset_index(inplace=True, drop=True)
@@ -334,7 +334,7 @@ def main():
     shap_explainer = shap.TreeExplainer(model)
     shap_values = shap_explainer.shap_values(X)
     shap_df = pd.DataFrame(
-        list(zip(X.columns, np.abs(shap_values[0]).mean(0))),
+        list(zip(X[relevant_features].columns, np.abs(shap_values[0]).mean(0))),
         columns=['feature', 'importance'])
     shap_df = shap_df.sort_values(by=['importance'], ascending=False)
     shap_df.reset_index(inplace=True, drop=True)
@@ -356,8 +356,8 @@ def main():
     #plotting local feature importance.
     st.header("Interprétabilité locale du modèle")
     fig10 = plt.figure()
-    shap.summary_plot(shap_values, X,
-                        feature_names=list(X.columns),
+    shap.summary_plot(shap_values, X[relevant_features],
+                        feature_names=list(X[relevant_features].columns),
                         max_display=50,
                         plot_type='bar',
                         plot_size=(5, 15))
