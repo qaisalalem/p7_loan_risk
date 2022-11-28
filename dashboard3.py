@@ -166,11 +166,11 @@ def main():
                         'AMT_INCOME_TOTAL','AMT_REQ_CREDIT_BUREAU_QRT','AMT_REQ_CREDIT_BUREAU_YEAR',
                         'ANNUITY_INCOME_RATE','INCOME_CREDIT_RATE','DAYS_BIRTH',
                         'REGION_POPULATION_RELATIVE']
-    norm_df=norm_df[relevant_features]
+    
     X = norm_df[norm_df.SK_ID_CURR == customer_id]
     
     X = X.drop(['SK_ID_CURR'], axis=1)
-    #X= X[relevant_features]
+    X= X[relevant_features]
     
     
     #Visualisation according to new advice
@@ -394,6 +394,11 @@ def main():
                  "  des données de chaque client.")
     st.pyplot(fig10)
 
+    
+    # compute SHAP values
+    explainer = shap.TreeExplainer(model, X, check_additivity=False)
+    shap_valuess = explainer(X)
+    shap.plots.waterfall(shap_valuess[0])
     
 if __name__ == '__main__':
     main()
