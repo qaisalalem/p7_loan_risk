@@ -342,7 +342,7 @@ def main():
 
     #plotting global feature importance.
     st.header("Interprétabilité globale du modèle")
-    fig9 = plt.figure(figsize=(10, 20))
+    fig9 = plt.figure(figsize=(10, 10))
     sns.barplot(x='importance', y='feature', data=dataviz)
     st.write("Le RGPD (article 22) prévoit des règles restrictives"
                  " pour éviter que l’homme ne subisse des décisions"
@@ -360,7 +360,7 @@ def main():
                         feature_names=list(X.columns),
                         max_display=15,
                         plot_type='bar',
-                        plot_size=(5, 20))
+                        plot_size=(5, 15))
     st.write("Le RGPD (article 22) prévoit des règles restrictives"
                  " pour éviter que l’homme ne subisse des décisions"
                  " émanant uniquement de machines.")
