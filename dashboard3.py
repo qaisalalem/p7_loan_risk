@@ -211,7 +211,7 @@ def main():
     #df = dash[variable1] #i managed to select my variable now i need to plot it. this method works, i need to try another method
     #df=[np.log(df)]
     
-    fig=ff.create_distplot(dash, [variable1] , bin_size= 0.3)
+    fig=ff.create_distplot(dash, variable1 , bin_size= 0.3)
     fig.add_vline(x=amt_inc_total, annotation_text=' Selected client')
     st.plotly_chart(fig, use_container_width=True)
 
