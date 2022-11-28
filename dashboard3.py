@@ -260,9 +260,8 @@ def main():
     
     #visualisation fig 1
     st.subheader('Graph showing variable 1')
-    a=sns.distplot(dash[variable1], bins=30)
+    a=sns.distplot(dash[variable1], bins=30, (figsize=(15,8))
     a.axvline(x=amt_inc_total)
-    a.figure(figsize=(15,8))
     st.pyplot()
 
     
