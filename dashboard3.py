@@ -207,7 +207,7 @@ def main():
 
     #visualisation fig 1
     
-    fig=sns.histplot((data=dash, x=variable1, bins=50)
+    fig=sns.histplot(data=dash, x=variable1, bins=50)
     #st.write(variable1)
     st.subheader('Graph showing variable 1')
     #df = dash[variable1] #i managed to select my variable now i need to plot it. this method works, i need to try another method
