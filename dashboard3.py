@@ -221,9 +221,10 @@ def main():
     
 
     #Visualisation fig 2
+    amt_inc_total2 = (dash.loc[data['SK_ID_CURR'] == int(customer_id), variable2].values[0])
     st.subheader('Graph showing variable 2')
     b=sns.distplot(dash[variable2], bins=30)
-    b.axvline(x=amt_inc_total)
+    b.axvline(x=amt_inc_total2)
     st.pyplot()
     #df2=data[variable2]
     #df2=[np.log(df2)]
