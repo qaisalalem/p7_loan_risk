@@ -199,7 +199,8 @@ def main():
 
     #st.subheader('Graph showing total income of all clients in the database')
     #i am using amt_inc_total to show selected client.
-    amt_inc_total = np.log(data.loc[data['SK_ID_CURR'] == int(customer_id), 'AMT_INCOME_TOTAL'].values[0])
+    #amt_inc_total = np.log(data.loc[data['SK_ID_CURR'] == int(customer_id), 'AMT_INCOME_TOTAL'].values[0])
+    amt_inc_total = (data.loc[data['SK_ID_CURR'] == int(customer_id), 'AMT_INCOME_TOTAL'].values[0])
     #x_a = [np.log(data['AMT_INCOME_TOTAL'])]
     #fig_a = ff.create_distplot(x_a,['AMT_INCOME_TOTAL'], bin_size=0.3)
     #fig_a.add_vline(x=amt_inc_total, annotation_text=' Selected client')
