@@ -148,6 +148,7 @@ def main():
     customer_df = data[data.SK_ID_CURR == customer_id]
     viz_df = customer_df.round(2)
     st.write(viz_df)
+    st.write(data[relevant_features])
 
     # Preprocessed customer data for prediction
     relevant_features= ['POS_SK_DPD_DEF','BUR_DAYS_CREDIT_ENDDATE','BUR_AMT_CREDIT_SUM','BUR_AMT_CREDIT_SUM_DEBT',
