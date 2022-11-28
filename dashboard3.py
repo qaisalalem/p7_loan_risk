@@ -243,7 +243,7 @@ def main():
         original_title = '<p style="font-family:Courier; color:red; font-size:65px; text-align: center;">Loan is refused</p>'#.format()
         st.markdown(original_title, unsafe_allow_html=True)
     
-    #dropdown menu for to graphs, correlation between selected variables
+    #dropdown menu for the graphs
     variables_list1= list(dash.columns)
     variable1= st.sidebar.selectbox(
         "Please select variable #1 :", variables_list1)
@@ -253,14 +253,8 @@ def main():
     variable2= st.sidebar.selectbox(
         "Please select variable #2 :", variables_list2)
 
-    #st.subheader('Graph showing total income of all clients in the database')
-    #i am using amt_inc_total to show selected client.
-    #amt_inc_total = np.log(data.loc[data['SK_ID_CURR'] == int(customer_id), 'AMT_INCOME_TOTAL'].values[0])
+    
     amt_inc_total = (dash.loc[data['SK_ID_CURR'] == int(customer_id), variable1].values[0])
-    #x_a = [np.log(data['AMT_INCOME_TOTAL'])]
-    #fig_a = ff.create_distplot(x_a,['AMT_INCOME_TOTAL'], bin_size=0.3)
-    #fig_a.add_vline(x=amt_inc_total, annotation_text=' Selected client')
-    #st.plotly_chart(fig_a, use_container_width=True)
     st.set_option('deprecation.showPyplotGlobalUse', False)
     
     
@@ -271,8 +265,6 @@ def main():
     st.pyplot()
 
     
-    
-    
 
     #Visualisation fig 2
     amt_inc_total2 = (dash.loc[data['SK_ID_CURR'] == int(customer_id), variable2].values[0])
@@ -281,12 +273,10 @@ def main():
     b.axvline(x=amt_inc_total2)
     st.pyplot()
    
-    
+    #Visualisation fig 3
     st.subheader('Graph showing scatterplot between the 2 selected variables')
     c=sns.scatterplot(x=dash[variable1], y=dash[variable2])
     st.pyplot()
-    #fig_c.add_vline(x=amt_inc_total, annotation_text=' Selected client')
-    #st.plotly_chart(fig_c, use_container_width=True)
 
 
 
