@@ -209,7 +209,7 @@ def main():
     # create histograms
     
     sns.distplot(dash[variable1], bins=30)
-    plt.axvline(x=amt_inc_total)
+    sns.axvline(x=amt_inc_total)
     st.pyplot()
 
     #st.pyplot(fig)
