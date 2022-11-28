@@ -259,6 +259,7 @@ def main():
     
     
     #visualisation fig 1
+    plt.figure(figsize=(15,8))
     st.subheader('Graph showing variable 1')
     a=sns.distplot(dash[variable1], bins=30)
     a.axvline(x=amt_inc_total)  
