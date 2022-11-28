@@ -395,9 +395,8 @@ def main():
     st.pyplot(fig10)
 
     
-    # compute SHAP values
-    explainers = shap.TreeExplainer(model, X_norm[relevant_features], check_additivity=False)
-    shap_valuess = explainers(X_norm[relevant_features])
+    # waterfall plot
+    
     shap.plots.waterfall(shap_valuess[0])
     st.pyplot()
     
