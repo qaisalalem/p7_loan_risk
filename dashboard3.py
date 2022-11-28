@@ -167,6 +167,7 @@ def main():
                         'ANNUITY_INCOME_RATE','INCOME_CREDIT_RATE','DAYS_BIRTH',
                         'REGION_POPULATION_RELATIVE']
     X = norm_df[norm_df.SK_ID_CURR == customer_id]
+    st.write(X)
     X = X.drop(['SK_ID_CURR'], axis=1)
     X= X[relevant_features]
     
