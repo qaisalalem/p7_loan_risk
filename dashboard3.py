@@ -171,7 +171,7 @@ def main():
     dash['DAYS_EMPLOYED']=np.sqrt(dash['DAYS_EMPLOYED']*-1)
     dash['AGE'] = dash['DAYS_BIRTH'] / 365
     dash['AGE']= dash.AGE.abs().astype('int64')
-    
+    dash=dash.drop(['DAYS_BIRTH'], axis=1)
     
     
     
